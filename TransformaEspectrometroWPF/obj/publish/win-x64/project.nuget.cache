@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "DLyyYyH6vCU=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\ihagod\\Downloads\\visual studio\\Tela Estudo\\WpfApp1\\WpfApp1\\WpfApp1.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\ihagod\\.nuget\\packages\\microsoft.net.illink.tasks\\8.0.20\\microsoft.net.illink.tasks.8.0.20.nupkg.sha512"
+  ],
+  "logs": []
+}

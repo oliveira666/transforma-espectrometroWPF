@@ -1,0 +1,89 @@
+﻿<Window x:Class="TransformaEspectrometroWPF.Forms.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="Transforma Espectrômetro" Height="500" Width="800"
+        Loaded="MainWindow_Loaded">
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="142*"/>
+            <ColumnDefinition Width="177*"/>
+            <ColumnDefinition Width="481*"/>
+        </Grid.ColumnDefinitions>
+        <TabControl x:Name="MainTabControl" Grid.ColumnSpan="3" Width="790" HorizontalAlignment="Left">
+            <!-- Aba Processamento -->
+            <TabItem x:Name="mainTab" Header="Processamento" IsEnabled="{Binding FullTabsEnabled, Mode=OneWay}">
+                <Grid Background="#FFE5E5E5">
+                    <GroupBox x:Name="groupAutomatico" Header="Processamento Automático" Width="382" Height="442" Margin="0,10,397,4" HorizontalAlignment="Right">
+                        <WrapPanel x:Name="wrapAutomatico">
+                            <Button x:Name="BtnMainStartStop" Click="BtnMainStartStop_Click" Content="Iniciar" Width="80" Margin="5"/>
+
+                        </WrapPanel>
+                    </GroupBox>
+
+                    <GroupBox x:Name="groupManual" Header="Processamento Manual" Width="382" Height="442" Margin="397,10,0,4" HorizontalAlignment="Left">
+                        <StackPanel Margin="10">
+                            <Label Content="Arquivo:"/>
+                            <TextBox x:Name="TbCaminhoArquivo" IsReadOnly="True" Width="200" TextWrapping="NoWrap"/>
+                            <Button x:Name="BtnCarregaArquivo" Click="BtnCarregaArquivo_Click" Content="Escolher" Width="80"/>
+                            <TextBlock x:Name="TbStatusArquivo" Text="Status do arquivo" TextWrapping="Wrap" Width="300"/>
+                            <StackPanel Orientation="Horizontal" Margin="0,5,0,0">
+                                <Button x:Name="BtnProcessaManual" Click="BtnProcessaManual_Click" Content="Processar" Width="80"/>
+                                <Button x:Name="BtnLimparArquivo" Click="BtnLimparArquivo_Click" Content="Limpar" Width="80" Margin="5,0,0,0"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </GroupBox>
+                </Grid>
+            </TabItem>
+
+            <!-- Aba Comunicações -->
+            <TabItem x:Name="comsTab" Header="Comunicações" IsEnabled="{Binding FullTabsEnabled, Mode=OneWay}">
+                <StackPanel x:Name="stackComs" Background="#FFE5E5E5" Margin="10" Orientation="Vertical" >
+
+                    
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,2">
+                        <Ellipse x:Name="DotPastaMatriz" Width="16" Height="16" Fill="Gray" Margin="0,0,5,0"/>
+                        <TextBlock Text="Acesso Pasta Matriz" FontWeight="Bold" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <TextBlock x:Name="TbPastaMatrizError" Text="TbPastaMatrizError" TextWrapping="Wrap" Width="400" Margin="21,0,0,10"/>
+
+                   
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,2">
+                        <Ellipse x:Name="DotArquivoPendente" Width="16" Height="16" Fill="Gray" Margin="0,0,5,0"/>
+                        <TextBlock Text="Arquivo Pendente" FontWeight="Bold" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <TextBlock x:Name="TbArquivoPendenteError" Text="TbArquivoPendenteError" TextWrapping="Wrap" Width="400" Margin="21,0,0,10"/>
+
+                    
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,0,0,2">
+                        <Ellipse x:Name="DotNaoProcessado" Width="16" Height="16" Fill="Gray" Margin="0,0,5,0"/>
+                        <TextBlock Text="Arquivo Não Processado" FontWeight="Bold" VerticalAlignment="Center"/>
+                    </StackPanel>
+                    <TextBlock x:Name="TbArquivoNaoProcessadoError" Text="TbArquivoNaoProcessadoError" TextWrapping="Wrap" Width="400" Margin="21,0,0,10"/>
+
+                    <!-- Botão e ProgressBar -->
+                    <Button x:Name="BtnTestaComunicacao" Click="BtnTestaComunicacao_Click" Content="Testar Comunicação" Width="150" Margin="0,5,0,0"/>
+                    <ProgressBar x:Name="pbTestaComunicacoes" Height="20" Width="100" Margin="0,5,0,0"/>
+
+                </StackPanel>
+            </TabItem>
+
+
+
+
+            <!-- Aba Configurações -->
+            <TabItem x:Name="settingsTab" Header="Configurações" IsEnabled="{Binding ViewEnabled, Mode=OneWay}">
+                <Grid Background="#FFE5E5E5">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="45*"/>
+                        <ColumnDefinition Width="749*"/>
+                    </Grid.ColumnDefinitions>
+                    <Button x:Name="BtnAbrirConfigINI" Click="BtnAbrirConfigINI_Click" Grid.Column="1" Content="Abrir config.ini" HorizontalAlignment="Left" Margin="10,53,0,0" VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Window>
