@@ -1,18 +1,18 @@
 {
   "Version": 1,
-  "WorkspaceRootPath": "C:\\Users\\ihagod\\Downloads\\visual studio\\Tela Estudo\\Transforma EspectrometroWPF\\",
+  "WorkspaceRootPath": "C:\\Users\\ihagod\\Downloads\\visual studio\\Tela Estudo\\TransformaEspectrometroWPF\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{34094DC5-22CB-4528-99DB-31CC3C5502A6}|TransformaEspectrometroWPF\\TransformaEspectrometroWPF.csproj|c:\\users\\ihagod\\downloads\\visual studio\\tela estudo\\transforma espectrometrowpf\\transformaespectrometrowpf\\forms\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
+      "AbsoluteMoniker": "D:0:0:{34094DC5-22CB-4528-99DB-31CC3C5502A6}|TransformaEspectrometroWPF\\TransformaEspectrometroWPF.csproj|c:\\users\\ihagod\\downloads\\visual studio\\tela estudo\\transformaespectrometrowpf\\transformaespectrometrowpf\\forms\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{34094DC5-22CB-4528-99DB-31CC3C5502A6}|TransformaEspectrometroWPF\\TransformaEspectrometroWPF.csproj|solutionrelative:transformaespectrometrowpf\\forms\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{34094DC5-22CB-4528-99DB-31CC3C5502A6}|TransformaEspectrometroWPF\\TransformaEspectrometroWPF.csproj|c:\\users\\ihagod\\downloads\\visual studio\\tela estudo\\transformaespectrometrowpf\\transformaespectrometrowpf\\forms\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}",
       "RelativeMoniker": "D:0:0:{34094DC5-22CB-4528-99DB-31CC3C5502A6}|TransformaEspectrometroWPF\\TransformaEspectrometroWPF.csproj|solutionrelative:transformaespectrometrowpf\\forms\\mainwindow.xaml||{F11ACC28-31D1-4C80-A34B-F4E09D3D753C}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{34094DC5-22CB-4528-99DB-31CC3C5502A6}|TransformaEspectrometroWPF\\TransformaEspectrometroWPF.csproj|c:\\users\\ihagod\\downloads\\visual studio\\tela estudo\\transforma espectrometrowpf\\transformaespectrometrowpf\\config.ini.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{34094DC5-22CB-4528-99DB-31CC3C5502A6}|TransformaEspectrometroWPF\\TransformaEspectrometroWPF.csproj|c:\\users\\ihagod\\downloads\\visual studio\\tela estudo\\transformaespectrometrowpf\\transformaespectrometrowpf\\config.ini.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{34094DC5-22CB-4528-99DB-31CC3C5502A6}|TransformaEspectrometroWPF\\TransformaEspectrometroWPF.csproj|solutionrelative:transformaespectrometrowpf\\config.ini.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{34094DC5-22CB-4528-99DB-31CC3C5502A6}|TransformaEspectrometroWPF\\TransformaEspectrometroWPF.csproj|c:\\users\\ihagod\\downloads\\visual studio\\tela estudo\\transforma espectrometrowpf\\transformaespectrometrowpf\\forms\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{34094DC5-22CB-4528-99DB-31CC3C5502A6}|TransformaEspectrometroWPF\\TransformaEspectrometroWPF.csproj|solutionrelative:transformaespectrometrowpf\\forms\\mainwindow.xaml.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -22,7 +22,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Bookmark",
@@ -30,38 +30,36 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 2,
               "Title": "config.ini.cs",
-              "DocumentMoniker": "C:\\Users\\ihagod\\Downloads\\visual studio\\Tela Estudo\\Transforma EspectrometroWPF\\TransformaEspectrometroWPF\\config.ini.cs",
+              "DocumentMoniker": "C:\\Users\\ihagod\\Downloads\\visual studio\\Tela Estudo\\TransformaEspectrometroWPF\\TransformaEspectrometroWPF\\config.ini.cs",
               "RelativeDocumentMoniker": "TransformaEspectrometroWPF\\config.ini.cs",
-              "ToolTip": "C:\\Users\\ihagod\\Downloads\\visual studio\\Tela Estudo\\Transforma EspectrometroWPF\\TransformaEspectrometroWPF\\config.ini.cs",
+              "ToolTip": "C:\\Users\\ihagod\\Downloads\\visual studio\\Tela Estudo\\TransformaEspectrometroWPF\\TransformaEspectrometroWPF\\config.ini.cs",
               "RelativeToolTip": "TransformaEspectrometroWPF\\config.ini.cs",
               "ViewState": "AgIAAAAAAAAAAAAAAAAAAAUAAAAfAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-10-17T21:56:03.549Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-10-17T21:56:03.549Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "MainWindow.xaml",
+              "DocumentMoniker": "C:\\Users\\ihagod\\Downloads\\visual studio\\Tela Estudo\\TransformaEspectrometroWPF\\TransformaEspectrometroWPF\\Forms\\MainWindow.xaml",
+              "RelativeDocumentMoniker": "TransformaEspectrometroWPF\\Forms\\MainWindow.xaml",
+              "ToolTip": "C:\\Users\\ihagod\\Downloads\\visual studio\\Tela Estudo\\TransformaEspectrometroWPF\\TransformaEspectrometroWPF\\Forms\\MainWindow.xaml",
+              "RelativeToolTip": "TransformaEspectrometroWPF\\Forms\\MainWindow.xaml",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
+              "WhenOpened": "2025-10-17T21:55:45.537Z"
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "MainWindow.xaml",
-              "DocumentMoniker": "C:\\Users\\ihagod\\Downloads\\visual studio\\Tela Estudo\\Transforma EspectrometroWPF\\TransformaEspectrometroWPF\\Forms\\MainWindow.xaml",
-              "RelativeDocumentMoniker": "TransformaEspectrometroWPF\\Forms\\MainWindow.xaml",
-              "ToolTip": "C:\\Users\\ihagod\\Downloads\\visual studio\\Tela Estudo\\Transforma EspectrometroWPF\\TransformaEspectrometroWPF\\Forms\\MainWindow.xaml",
-              "RelativeToolTip": "TransformaEspectrometroWPF\\Forms\\MainWindow.xaml",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003549|",
-              "WhenOpened": "2025-10-17T21:55:45.537Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
               "Title": "MainWindow.xaml.cs",
-              "DocumentMoniker": "C:\\Users\\ihagod\\Downloads\\visual studio\\Tela Estudo\\Transforma EspectrometroWPF\\TransformaEspectrometroWPF\\Forms\\MainWindow.xaml.cs",
+              "DocumentMoniker": "C:\\Users\\ihagod\\Downloads\\visual studio\\Tela Estudo\\TransformaEspectrometroWPF\\TransformaEspectrometroWPF\\Forms\\MainWindow.xaml.cs",
               "RelativeDocumentMoniker": "TransformaEspectrometroWPF\\Forms\\MainWindow.xaml.cs",
-              "ToolTip": "C:\\Users\\ihagod\\Downloads\\visual studio\\Tela Estudo\\Transforma EspectrometroWPF\\TransformaEspectrometroWPF\\Forms\\MainWindow.xaml.cs",
+              "ToolTip": "C:\\Users\\ihagod\\Downloads\\visual studio\\Tela Estudo\\TransformaEspectrometroWPF\\TransformaEspectrometroWPF\\Forms\\MainWindow.xaml.cs",
               "RelativeToolTip": "TransformaEspectrometroWPF\\Forms\\MainWindow.xaml.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAwAAAAcAAAAAAAAAA==",
+              "ViewState": "AgIAABIBAAAAAAAAAADwvzcBAAABAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-10-17T21:54:51.382Z",
               "EditorCaption": ""
