@@ -7,36 +7,35 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
 
 namespace TransformaEspectrometroWPF.Forms
 { 
     public partial class MainWindow : Window
     {
         private INI ini = null!;
-        private string caminhoCarregado = "";
+        private string caminhoCarregado = string.Empty;
         private string pastaMatriz = "";
         private string arquivosPendentes = "";
-        private string naoProcessado = "";
         private string processado = "";
-
+        private string naoProcessado = "";
         public MainWindow()
         {
             InitializeComponent();
-        Loaded += MainWindow_Loaded;
 
         }
-        private async void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        public async void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             ini = new INI();
 
-            // Opcional: ler algum valor do INI
-            string pastaMatriz = ini.Read("Pasta Matriz", "CAMINHO");
-            string arquivosPendentes = ini.Read("Arquivos Pendentes", "CAMINHO");
+             pastaMatriz = ini.PastaMatriz;
+             arquivosPendentes = ini.ArquivosPendentes;
+             processado = ini.Processado;
+             naoProcessado = ini.NaoProcessado;
 
             await F_TestarComunicacaoAsync();
 
@@ -94,6 +93,39 @@ namespace TransformaEspectrometroWPF.Forms
 
         }
 
+        public (int ok, int nok) ContarItens(string path)
+        {
+            try
+            {
+                string[] arquivos = Directory.GetFiles(path, "*.txt");
+                int ok = 0;
+                int nok = 0;
+
+                foreach (var arquivo in arquivos)
+                {
+                    string[] linhas = File.ReadAllLines(arquivo);
+                    if (linhas.Length == 0)
+                    {
+                        nok++;
+                        continue;
+                    }
+
+                    string[] cabecalho = linhas[0].Split(';');
+
+                    if (linhas.Length > 2 || !cabecalho[0].Contains("Timestamp"))
+                        nok++;
+                    else
+                        ok++;
+                }
+
+                return (ok, nok);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Erro ao ler os arquivos: " + ex.Message);
+                return (0, 0);
+            }
+        }
 
 
         private bool F_ValidarArquivo()
@@ -147,94 +179,100 @@ namespace TransformaEspectrometroWPF.Forms
             F_HabilitaTab(false);
             F_HabilitaTodosBotoes(false);
 
-            // Mostra labels
+            
             TbPastaMatrizError.Visibility = Visibility.Visible;
             TbArquivoNaoProcessadoError.Visibility = Visibility.Visible;
             TbArquivoPendenteError.Visibility = Visibility.Visible;
 
-            // Cria objeto INI
+            
             ini = new INI();
 
-            // Lê caminhos do INI
-            pastaMatriz = ini.Read("Pasta Matriz", "CAMINHO");
-            arquivosPendentes = ini.Read("Arquivos Pendentes", "CAMINHO");
-            naoProcessado = ini.Read("Nao Processado", "CAMINHO");
-            processado = ini.Read("Processado", "CAMINHO");
-
             pbTestaComunicacoes.Minimum = 0;
-            pbTestaComunicacoes.Maximum = 3;
+            pbTestaComunicacoes.Maximum = 4;
             pbTestaComunicacoes.Value = 0;
             pbTestaComunicacoes.Visibility = Visibility.Visible;
 
-            // 1️⃣ Valida Acesso Pasta Matriz
-            if (Directory.Exists(pastaMatriz))
+            //Default \\nhy.hydro.com\dfs\BR-SAO-ITU\Common\...
+            if (!Directory.Exists(pastaMatriz))
             {
-                TbPastaMatrizError.Text = "";
-                DotPastaMatriz.Fill = Brushes.Green;
-                await Task.Delay(1);
-            }
-            else if (pastaMatriz == "")
-            {
-                TbPastaMatrizError.Text = $"Verifique a configuração do arquivo config.ini \n {ini.FilePath}";
+                TbPastaMatrizError.Text = $"Diretório não encontrado! Verifique o config.ini\n{pastaMatriz}";
                 TbPastaMatrizError.Foreground = Brushes.Red;
                 DotPastaMatriz.Fill = Brushes.Red;
-
             }
             else
             {
-                TbPastaMatrizError.Text = $"Diretório Inválido!\n{pastaMatriz}";
-                TbPastaMatrizError.Foreground = Brushes.Red;
-                DotPastaMatriz.Fill = Brushes.Red;
+                TbPastaMatrizError.Text = "";
+                DotPastaMatriz.Fill = Brushes.Green;
 
             }
             await Task.Delay(500);
             pbTestaComunicacoes.Value++;
 
-            // 2️⃣ Valida arquivos pendentes
-            if (Directory.Exists(arquivosPendentes))
+            if (!Directory.Exists(processado))
             {
-                string[] arquivos = Directory.GetFiles(arquivosPendentes, "*.txt");
-                int qtdArquivos = arquivos.Length;
+                TbPastaMatrizError.Text = $"Diretório não encontrado! Verifique o config.ini\n{processado}";
+                TbPastaMatrizError.Foreground = Brushes.Red;
+                DotPastaMatriz.Fill = Brushes.Red;
+            }
+            else
+            {
+                TbPastaMatrizError.Text = "";
+                DotPastaMatriz.Fill = Brushes.Green;
 
-                if (qtdArquivos == 0)
+            }
+            await Task.Delay(500);
+            pbTestaComunicacoes.Value++;
+
+            // Default c:/temp/relatorios
+            if (!Directory.Exists(arquivosPendentes))
+            {
+                TbArquivoPendenteError.Text = $"Diretório não existe!\n{arquivosPendentes}";
+                TbArquivoPendenteError.Foreground = Brushes.Red;
+                DotArquivoPendente.Fill = Brushes.Red;
+            }
+            else
+            {
+
+                var itens = ContarItens(arquivosPendentes); 
+
+                if (itens.ok == 0)
                 {
                     TbArquivoPendenteError.Text = "";
                     DotArquivoPendente.Fill = Brushes.Green;
 
                 }
-                else if (qtdArquivos <= 5)
+                else if (itens.ok < 5)
                 {
-                    TbArquivoPendenteError.Text = $"Arquivos pendentes: {qtdArquivos}";
+                    TbArquivoPendenteError.Text = $"Arquivos pendentes: {itens.ok}";
                     DotArquivoPendente.Fill = Brushes.Orange;
 
                 }
-                
                 else
                 {
-                    TbArquivoPendenteError.Text = $"Arquivos pendentes: {qtdArquivos}";
+                    TbArquivoPendenteError.Text = $"Arquivos pendentes: {itens.ok}";
                     DotArquivoPendente.Fill = Brushes.Red;
 
                 }
-            }
-            else if (arquivosPendentes == "")
-            {
-                TbArquivoPendenteError.Text = $"Verifique a configuração do arquivo config.ini \n {ini.FilePath}";
-                TbArquivoPendenteError.Foreground = Brushes.Red;
-                DotArquivoPendente.Fill = Brushes.Red;
-            }
-            else
-            {
-                TbArquivoPendenteError.Text = "Caminho não encontrado";
-                TbArquivoPendenteError.Foreground = Brushes.Red;
-                DotArquivoPendente.Fill = Brushes.Red;
-
+                if (itens.nok > 0)
+                    TbArquivoPendenteError.Text += $"\nArquivos com erro: {itens.nok}";
             }
 
             await Task.Delay(500);
             pbTestaComunicacoes.Value++;
 
-            // 3 Valida arquivos não processados
-            if (Directory.Exists(naoProcessado))
+
+            if (!Directory.Exists(naoProcessado))
+            {
+                var msg = MessageBox.Show($"ERRO: A pasta {naoProcessado} não existe.\n\n Deseja criar uma nova pasta?",
+                                          "Mensagem", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (msg == MessageBoxResult.Yes)
+                    if (!string.IsNullOrWhiteSpace(naoProcessado)) Directory.CreateDirectory(naoProcessado);
+
+                TbArquivoNaoProcessadoError.Text = $"Diretório não existe!\n{naoProcessado}";
+                TbArquivoNaoProcessadoError.Foreground = Brushes.Red;
+                DotNaoProcessado.Fill = Brushes.Red;
+            }
+            else
             {
                 string[] arquivos = Directory.GetFiles(naoProcessado, "*.txt");
                 int qtdArquivos = arquivos.Length;
@@ -258,24 +296,13 @@ namespace TransformaEspectrometroWPF.Forms
 
                 }
             }
-            else if (naoProcessado == "")
-            {
-                TbArquivoNaoProcessadoError.Text = $"Verifique a configuração do arquivo config.ini \n {ini.FilePath}";
-                TbArquivoNaoProcessadoError.Foreground = Brushes.Red;
-                DotNaoProcessado.Fill = Brushes.Red;
-            }
-            else
-            {
-                TbArquivoNaoProcessadoError.Text = "Caminho não encontrado";
-                TbArquivoNaoProcessadoError.Foreground = Brushes.Red;
-                DotNaoProcessado.Fill = Brushes.Red;
-            }
+
 
             await Task.Delay(500);
             pbTestaComunicacoes.Value++;
 
             // Finaliza progress bar
-            if (pbTestaComunicacoes.Value == 3)
+            if (pbTestaComunicacoes.Value >= pbTestaComunicacoes.Maximum)
             {
                 await Task.Delay(500);
                 pbTestaComunicacoes.Value = 0;

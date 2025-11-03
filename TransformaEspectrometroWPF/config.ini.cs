@@ -2,6 +2,7 @@
 using System.IO;
 using System.Runtime.InteropServices;
 using System.Text;
+using System.Windows.Controls;
 
 namespace TransformaEspectrometroWPF.Forms
 {
@@ -20,7 +21,7 @@ namespace TransformaEspectrometroWPF.Forms
         // Construtor: usa a pasta onde o executável está rodando
         public INI(string configINI = "config.ini")
         {
-            
+
             Path = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, configINI);
 
             // Cria o arquivo com valores padrão se não existir
@@ -30,12 +31,12 @@ namespace TransformaEspectrometroWPF.Forms
                 Write("Arquivos Pendentes", "CAMINHO", @"C:/temp/relatorios");
                 Write("Processado", "CAMINHO", @"C:/temp/relatorios/Processado");
                 Write("Nao Processado", "CAMINHO", @"C:/temp/relatorios/Nao Processado");
-
-                CriarPastasPadrao();
             }
-        }
 
-        // Lê valor da chave
+                string[] Folders = { PastaMatriz, ArquivosPendentes, Processado, NaoProcessado };
+                foreach (string folder in Folders)
+                    if (!string.IsNullOrWhiteSpace(folder) && !Directory.Exists(folder)) Directory.CreateDirectory(folder);
+        }
         public string Read(string section, string key)
         {
             StringBuilder temp = new StringBuilder(255);
@@ -43,24 +44,16 @@ namespace TransformaEspectrometroWPF.Forms
             return temp.ToString();
         }
 
+        // Propriedades de instância para os caminhos
+        public string PastaMatriz => Read("Pasta Matriz", "CAMINHO");
+        public string ArquivosPendentes => Read("Arquivos Pendentes", "CAMINHO");
+        public string Processado => Read("Processado", "CAMINHO");
+        public string NaoProcessado => Read("Nao Processado", "CAMINHO");
+
         // Escreve valor na chave
         public void Write(string section, string key, string value)
         {
             WritePrivateProfileString(section, key, value, Path);
-        }
-
-        // Cria as pastas configuradas no INI (se não existirem)
-        private void CriarPastasPadrao()
-        {
-            string pastaMatriz = Read("Pasta Matriz", "CAMINHO");
-            string arquivosPendentes = Read("Arquivos Pendentes", "CAMINHO");
-            string processado = Read("Processado", "CAMINHO");
-            string naoProcessado = Read("Nao Processado", "CAMINHO");
-
-            if (!string.IsNullOrWhiteSpace(pastaMatriz)) Directory.CreateDirectory(pastaMatriz);
-            if (!string.IsNullOrWhiteSpace(arquivosPendentes)) Directory.CreateDirectory(arquivosPendentes);
-            if (!string.IsNullOrWhiteSpace(processado)) Directory.CreateDirectory(processado);
-            if (!string.IsNullOrWhiteSpace(naoProcessado)) Directory.CreateDirectory(naoProcessado);
         }
     }
 }
